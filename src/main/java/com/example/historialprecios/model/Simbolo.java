@@ -1,12 +1,13 @@
 package com.example.historialprecios.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "simbolos", indexes = {
-    @Index(name = "idx_simbolo_unique", columnList = "simbolo", unique = true)
+        @Index(name = "idx_simbolo_unique", columnList = "simbolo", unique = true)
 })
 public class Simbolo {
 
@@ -27,7 +28,7 @@ public class Simbolo {
     private String industria;
 
     @Column(length = 20)
-    private String bolsa;      // NYSE, NASDAQ, etc.
+    private String bolsa; // NYSE, NASDAQ, etc.
 
     @Column(length = 50)
     private String pais;
@@ -39,39 +40,91 @@ public class Simbolo {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // Relación 1:N — un símbolo tiene muchos precios históricos
+    @JsonIgnore
     @OneToMany(mappedBy = "simboloRef", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PrecioAccion> precios;
 
-    public Simbolo() {}
+    public Simbolo() {
+    }
 
     // Getters y Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getSimbolo() { return simbolo; }
-    public void setSimbolo(String simbolo) { this.simbolo = simbolo; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getSimbolo() {
+        return simbolo;
+    }
 
-    public String getSector() { return sector; }
-    public void setSector(String sector) { this.sector = sector; }
+    public void setSimbolo(String simbolo) {
+        this.simbolo = simbolo;
+    }
 
-    public String getIndustria() { return industria; }
-    public void setIndustria(String industria) { this.industria = industria; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getBolsa() { return bolsa; }
-    public void setBolsa(String bolsa) { this.bolsa = bolsa; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getPais() { return pais; }
-    public void setPais(String pais) { this.pais = pais; }
+    public String getSector() {
+        return sector;
+    }
 
-    public Boolean getActivo() { return activo; }
-    public void setActivo(Boolean activo) { this.activo = activo; }
+    public void setSector(String sector) {
+        this.sector = sector;
+    }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public String getIndustria() {
+        return industria;
+    }
 
-    public List<PrecioAccion> getPrecios() { return precios; }
-    public void setPrecios(List<PrecioAccion> precios) { this.precios = precios; }
+    public void setIndustria(String industria) {
+        this.industria = industria;
+    }
+
+    public String getBolsa() {
+        return bolsa;
+    }
+
+    public void setBolsa(String bolsa) {
+        this.bolsa = bolsa;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public List<PrecioAccion> getPrecios() {
+        return precios;
+    }
+
+    public void setPrecios(List<PrecioAccion> precios) {
+        this.precios = precios;
+    }
 }
